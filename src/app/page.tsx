@@ -4,16 +4,6 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { supabase } from '@/lib/supabase';
 
-// Beautiful centered loader component
-function Loader() {
-  return (
-    <div className="flex flex-col items-center space-y-4">
-      <div className="w-16 h-16 border-4 border-t-transparent border-indigo-600 rounded-full animate-spin"></div>
-      <span className="text-lg text-gray-600">Loading...</span>
-    </div>
-  );
-}
-
 export default function Home() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);

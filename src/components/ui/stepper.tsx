@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
-import { ChevronRight, ChevronLeft, Pencil } from 'lucide-react';
+import { ChevronRight, ChevronLeft } from 'lucide-react';
 
 // Define the Step interface
 interface Step {

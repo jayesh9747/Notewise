@@ -6,7 +6,7 @@ import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
-import { Star, Save, ArrowLeft, Trash2, FolderIcon, Clock, FileText } from 'lucide-react';
+import { Star, Save, ArrowLeft, Trash2, FolderIcon, Clock } from 'lucide-react';
 import {
     Select,
     SelectContent,
@@ -17,7 +17,6 @@ import {
 import { Card, CardContent } from '@/components/ui/card';
 import { format } from 'date-fns';
 
-import type { Note } from '@/lib/supabase/client';
 import { useFolders } from '@/hooks/use-folders';
 import { useNote, useUpdateNote, useDeleteNote } from '@/hooks/use-notes';
 import { SummaryDisplay } from '@/components/summary/SummaryDisplay';
@@ -113,8 +112,11 @@ export function NoteEditor({ noteId }: NoteEditorProps) {
 
     if (isLoading) {
         return (
-            <div className="flex justify-center items-center h-[70vh]">
-                <div className="animate-pulse text-lg font-medium">Loading note...</div>
+            <div className="flex items-center justify-center h-screen w-full">
+                <div className="flex flex-col items-center space-y-2">
+                    <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-blue-500"></div>
+                    <p className="text-lg font-medium text-gray-700">Loading More...</p>
+                </div>
             </div>
         );
     }

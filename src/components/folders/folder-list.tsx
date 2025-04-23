@@ -3,12 +3,10 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
@@ -22,11 +20,18 @@ export function FolderList() {
   const pathname = usePathname();
   const { data: folders, isLoading } = useFolders();
   const [isCreating, setIsCreating] = useState(false);
-  
+
   if (isLoading) {
-    return <div className="flex justify-center p-8">Loading folders...</div>;
+    return (
+      <div className="flex items-center justify-center h-screen w-full">
+        <div className="flex flex-col items-center space-y-2">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-blue-500"></div>
+          <p className="text-lg font-medium text-gray-700">Searching...</p>
+        </div>
+      </div>
+    );
   }
-  
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -36,7 +41,7 @@ export function FolderList() {
           New Folder
         </Button>
       </div>
-      
+
       {isCreating && (
         <Card className="mb-6">
           <CardHeader>
@@ -47,12 +52,12 @@ export function FolderList() {
           </CardContent>
         </Card>
       )}
-      
+
       {folders && folders.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {folders.map((folder) => (
-            <Link 
-              key={folder.id} 
+            <Link
+              key={folder.id}
               href={`/notes/folders/${folder.id}`}
               className="block"
             >

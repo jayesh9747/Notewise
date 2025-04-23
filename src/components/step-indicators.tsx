@@ -1,5 +1,3 @@
-import { LucideIcon } from 'lucide-react';
-
 interface Step {
   id: number;
   title: string;

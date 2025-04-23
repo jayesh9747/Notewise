@@ -17,7 +17,8 @@ export async function summarizeText(
   customPrompt?: string
 ): Promise<SummaryResponse> {
   const apiKey =
-    process.env.NEXT_GEMINI_API_KEY || "AIzaSyAGeRqIXgLR-ZPsjA6hXjMNjsYBCZo9WXo";
+    process.env.NEXT_GEMINI_API_KEY ||
+    "AIzaSyAGeRqIXgLR-ZPsjA6hXjMNjsYBCZo9WXo";
   if (!apiKey) {
     throw new Error(
       "Missing API key for Gemini. Set GEMINI_API_KEY in environment variables."
@@ -64,8 +65,9 @@ export async function summarizeText(
       summary: summaryText,
       createdAt: new Date().toISOString(),
     };
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Error calling Gemini API:", error);
+
     if (axios.isAxiosError(error) && error.response) {
       console.error("API response:", error.response.data);
       throw new Error(
@@ -74,6 +76,7 @@ export async function summarizeText(
         )}`
       );
     }
+
     throw new Error("Failed to generate summary");
   }
 }

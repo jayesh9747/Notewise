@@ -7,29 +7,36 @@ import { FilePlus, FolderOpen } from 'lucide-react';
 import { NotesGrid } from '@/components/notes/notes-grid';
 import { useFolders } from '@/hooks/use-folders';
 import { useNotesByFolder } from '@/hooks/use-notes';
-import { use } from 'react'; // Import use from React
 
-interface FolderDetailPageProps {
-    params: {
-        id: string;
-    };
+interface FolderPageParams {
+    id: string;
 }
 
-export default function FolderDetailPage({ params }: FolderDetailPageProps) {
-    const { id } = use(params);
-    const { data: notes, isLoading: notesLoading } = useNotesByFolder(id);
+interface FolderPageProps {
+    params: Promise<FolderPageParams>;
+}
+
+export default function FolderDetailPage({ params }: FolderPageProps) {
+    const [folderId, setFolderId] = useState<string>('');
+    const { data: notes, isLoading: notesLoading } = useNotesByFolder(folderId);
     const { data: folders } = useFolders();
     const [folderName, setFolderName] = useState('');
-    
+
     useEffect(() => {
-        if (folders) {
-            const folder = folders.find(f => f.id === id);
+        params.then(({ id }) => {
+            setFolderId(id);
+        });
+    }, [params]);
+
+    useEffect(() => {
+        if (folders && folderId) {
+            const folder = folders.find(f => f.id === folderId);
             if (folder) {
                 setFolderName(folder.name);
             }
         }
-    }, [folders, id]);
-    
+    }, [folders, folderId]);
+
     return (
         <div className="space-y-6">
             <div className="flex items-center justify-between">
@@ -44,9 +51,14 @@ export default function FolderDetailPage({ params }: FolderDetailPageProps) {
                     </Link>
                 </Button>
             </div>
-            
+
             {notesLoading ? (
-                <div>Loading notes...</div>
+                <div className="flex items-center justify-center h-screen w-full">
+                    <div className="flex flex-col items-center space-y-2">
+                        <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-blue-500"></div>
+                        <p className="text-lg font-medium text-gray-700">Notes Loading...</p>
+                    </div>
+                </div>
             ) : (
                 <NotesGrid
                     notes={notes || []}

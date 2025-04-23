@@ -12,11 +12,13 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
-import { Search, User, LogOut } from "lucide-react";
+import { Search, User as UserIcon, LogOut } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { User } from '@supabase/supabase-js'
+
 
 interface AppNavbarProps {
-    user: any;
+    user: User;
 }
 
 export function AppNavbar({ user }: AppNavbarProps) {
@@ -46,7 +48,7 @@ export function AppNavbar({ user }: AppNavbarProps) {
                                 <Avatar className="h-8 w-8">
                                     <AvatarImage src={user?.user_metadata?.avatar_url || ""} alt="User" />
                                     <AvatarFallback>
-                                        {user?.email?.charAt(0).toUpperCase() || <User className="h-4 w-4" />}
+                                        {user?.email?.charAt(0).toUpperCase() || <UserIcon className="h-4 w-4" />}
                                     </AvatarFallback>
                                 </Avatar>
                             </Button>

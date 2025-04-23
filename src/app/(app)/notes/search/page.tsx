@@ -35,7 +35,12 @@ export default function SearchNotesPage() {
             </div>
 
             {isLoading ? (
-                <div>Searching...</div>
+                <div className="flex items-center justify-center h-screen w-full">
+                    <div className="flex flex-col items-center space-y-2">
+                        <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-blue-500"></div>
+                        <p className="text-lg font-medium text-gray-700">Searching...</p>
+                    </div>
+                </div>
             ) : (
                 <>
                     {debouncedQuery ? (

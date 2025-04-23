@@ -1,5 +1,4 @@
-
-'use client'
+'use client';
 import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Button } from "@/components/ui/button";
@@ -22,7 +21,7 @@ export default function AuthForm() {
     // Check if user is already logged in
     useEffect(() => {
         const checkSession = async () => {
-            const { data: { session } } = await supabase.auth.getSession();
+            const { session } = (await supabase.auth.getSession()).data;
             console.log(session);
             if (session) {
                 router.push(redirectTo);
@@ -37,7 +36,7 @@ export default function AuthForm() {
         setIsLoading(true);
 
         try {
-            const { data, error } = await supabase.auth.signInWithPassword({
+            const { error } = await supabase.auth.signInWithPassword({
                 email,
                 password,
             });
@@ -46,8 +45,12 @@ export default function AuthForm() {
 
             toast.success("Signed in successfully");
             router.push(redirectTo);
-        } catch (error: any) {
-            toast.error(error.message || "Failed to sign in");
+        } catch (error: unknown) {
+            if (error instanceof Error) {
+                toast.error(error.message || "Failed to sign in");
+            } else {
+                toast.error("Failed to sign in due to unknown error");
+            }
         } finally {
             setIsLoading(false);
         }
@@ -73,8 +76,12 @@ export default function AuthForm() {
             } else {
                 toast.success("Success! Please check your email to confirm your account.");
             }
-        } catch (error: any) {
-            toast.error(error.message || "Failed to sign up");
+        } catch (error: unknown) {
+            if (error instanceof Error) {
+                toast.error(error.message || "Failed to sign up");
+            } else {
+                toast.error("Failed to sign up due to unknown error");
+            }
         } finally {
             setIsLoading(false);
         }
@@ -93,8 +100,12 @@ export default function AuthForm() {
 
             if (error) throw error;
             // Redirect is handled by Supabase OAuth
-        } catch (error: any) {
-            toast.error(error.message || "Failed to sign in with Google");
+        } catch (error: unknown) {
+            if (error instanceof Error) {
+                toast.error(error.message || "Failed to sign in with Google");
+            } else {
+                toast.error("Google sign in failed due to unknown error");
+            }
             setIsLoading(false);
         }
     };

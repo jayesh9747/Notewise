@@ -1,4 +1,7 @@
-import AuthForm from "@/components/auth/AuthForm";
+'use client';
+
+import { Suspense } from 'react';
+import AuthForm from '@/components/auth/AuthForm';
 
 export default function AuthPage() {
     return (
@@ -9,7 +12,9 @@ export default function AuthPage() {
                     <p className="text-gray-600 mt-2">Your AI-powered note-taking companion</p>
                 </div>
 
-                <AuthForm />
+                <Suspense fallback={<div>Loading form...</div>}>
+                    <AuthForm />
+                </Suspense>
 
                 <div className="text-center mt-6 text-sm text-gray-500">
                     <p>Capture, organize, and enhance your ideas with AI assistance</p>
