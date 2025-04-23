@@ -17,6 +17,7 @@ export default function AuthForm() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    console.log("Redirect URL:", `${window.location.origin}/auth/callback`);
 
     // Check if user is already logged in
     useEffect(() => {
