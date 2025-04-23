@@ -12,13 +12,12 @@ export interface SummaryResponse {
   createdAt: string;
 }
 
-// Function to send summarization request to Gemini API
 export async function summarizeText(
   text: string,
   customPrompt?: string
 ): Promise<SummaryResponse> {
   const apiKey =
-    process.env.GEMINI_API_KEY || "AIzaSyAGeRqIXgLR-ZPsjA6hXjMNjsYBCZo9WXo";
+    process.env.NEXT_GEMINI_API_KEY || "AIzaSyAGeRqIXgLR-ZPsjA6hXjMNjsYBCZo9WXo";
   if (!apiKey) {
     throw new Error(
       "Missing API key for Gemini. Set GEMINI_API_KEY in environment variables."

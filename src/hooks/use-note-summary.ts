@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { summarizeText } from "@/lib/deepseek/client";
+import { summarizeText } from "@/lib/gemini/client";
 import { supabase } from "@/lib/supabase/client";
 
 export function useGenerateNoteSummary() {

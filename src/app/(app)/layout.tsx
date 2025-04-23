@@ -44,7 +44,14 @@ export default function ProtectedLayout({ children }: LayoutProps) {
     }, [router])
 
     if (isLoading) {
-        return <div className="flex-1 items-center justify-center max-w-full h-screen">Loading...</div>
+        return (
+            <div className="flex items-center justify-center h-screen w-full">
+                <div className="flex flex-col items-center space-y-2">
+                    <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-blue-500"></div>
+                    <p className="text-lg font-medium text-gray-700">Loading...</p>
+                </div>
+            </div>
+        )
     }
 
     return (
