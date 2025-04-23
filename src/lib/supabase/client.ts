@@ -12,6 +12,8 @@ export type Note = {
   content: string | null;
   is_starred: boolean;
   folder_id: string | null;
+  summary?: string | null;
+  summary_updated_at?: string | null;
   created_at: string;
   updated_at: string;
 };

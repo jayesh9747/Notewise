@@ -16,7 +16,6 @@ interface FolderDetailPageProps {
 }
 
 export default function FolderDetailPage({ params }: FolderDetailPageProps) {
-    // Use React.use() to unwrap the params object
     const { id } = use(params);
     const { data: notes, isLoading: notesLoading } = useNotesByFolder(id);
     const { data: folders } = useFolders();

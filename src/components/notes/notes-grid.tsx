@@ -55,52 +55,55 @@ export function NotesGrid({ notes, emptyMessage, isLoading = false }: NotesGridP
 
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {notes.map((note) => (
-                <Card
-                    key={note.id}
-                    className={cn(
-                        "h-full cursor-pointer hover:shadow-md transition-shadow",
-                        pathname === `/notes/${note.id}` && "border-primary"
-                    )}
-                >
-                    <CardHeader className="pb-2">
-                        <div className="flex justify-between items-center">
-                            <CardTitle className="flex items-center gap-2 truncate">
-                                <File className="h-5 w-5 text-primary flex-shrink-0" />
-                                <span className="truncate">{note.title}</span>
-                            </CardTitle>
-                            <Button
-                                variant="ghost"
-                                size="icon"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    e.stopPropagation();
-                                    toggleStar(note);
-                                }}
-                            >
-                                {note.is_starred ? (
-                                    <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                                ) : (
-                                    <StarOff className="h-4 w-4 text-muted-foreground" />
-                                )}
-                            </Button>
-                        </div>
-                    </CardHeader>
-                    <CardContent className="pb-2">
-                        <p className="text-sm text-muted-foreground line-clamp-3">
-                            {note.content || 'No content'}
-                        </p>
-                    </CardContent>
-                    <CardFooter className="pt-1">
-                        <p className="text-xs text-muted-foreground">
-                            {note.updated_at ? format(new Date(note.updated_at), 'MMM d, yyyy') : 'N/A'}
-                        </p>
-                    </CardFooter>
-                    <Link href={`/notes/${note.id}`} className="absolute inset-0">
-                        <span className="sr-only">View note</span>
-                    </Link>
-                </Card>
-            ))}
+            {notes.map((note) => {
+                const notePath = `/notes/${note.id}`;
+                return (
+                    <Card
+                        key={note.id}
+                        className={cn(
+                            'relative h-full cursor-pointer hover:shadow-md transition-shadow',
+                            pathname === notePath && 'border-primary'
+                        )}
+                    >
+                        <CardHeader className="pb-2">
+                            <div className="flex justify-between items-center">
+                                <CardTitle className="flex items-center gap-2 truncate">
+                                    <File className="h-5 w-5 text-primary flex-shrink-0" />
+                                    <span className="truncate">{note.title}</span>
+                                </CardTitle>
+                                <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        e.stopPropagation();
+                                        toggleStar(note);
+                                    }}
+                                >
+                                    {note.is_starred ? (
+                                        <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                                    ) : (
+                                        <StarOff className="h-4 w-4 text-muted-foreground" />
+                                    )}
+                                </Button>
+                            </div>
+                        </CardHeader>
+                        <CardContent className="pb-2">
+                            <p className="text-sm text-muted-foreground line-clamp-3">
+                                {note.content || 'No content'}
+                            </p>
+                        </CardContent>
+                        <CardFooter className="pt-1">
+                            <p className="text-xs text-muted-foreground">
+                                {note.updated_at ? format(new Date(note.updated_at), 'MMM d, yyyy') : 'N/A'}
+                            </p>
+                        </CardFooter>
+                        <Link href={notePath} className="absolute inset-0">
+                            <span className="sr-only">View note</span>
+                        </Link>
+                    </Card>
+                );
+            })}
         </div>
     );
 }

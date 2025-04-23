@@ -1,13 +1,13 @@
 'use client';
 
+import React from 'react';
 import { NoteEditor } from '@/components/notes/note-editor';
 
 interface NoteDetailPageProps {
-    params: {
-        id: string;
-    };
+    params: Promise<{ id: string }>;
 }
 
 export default function NoteDetailPage({ params }: NoteDetailPageProps) {
-    return <NoteEditor noteId={params.id} />;
+    const { id } = React.use(params);
+    return <NoteEditor noteId={id} />;
 }

@@ -6,7 +6,7 @@ import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
-import { Star, Save, ArrowLeft, Trash2, FolderIcon, Clock } from 'lucide-react';
+import { Star, Save, ArrowLeft, Trash2, FolderIcon, Clock, FileText } from 'lucide-react';
 import {
     Select,
     SelectContent,
@@ -20,6 +20,7 @@ import { format } from 'date-fns';
 import type { Note } from '@/lib/supabase/client';
 import { useFolders } from '@/hooks/use-folders';
 import { useNote, useUpdateNote, useDeleteNote } from '@/hooks/use-notes';
+import { SummaryDisplay } from '@/components/summary/SummaryDisplay';
 
 interface NoteEditorProps {
     noteId: string;
@@ -177,7 +178,7 @@ export function NoteEditor({ noteId }: NoteEditorProps) {
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
                             placeholder="Note title"
-                            className="text-2xl  font-bold border-b-2 border-gray-200 hover:border-blue-300 focus:border-blue-500 shadow-none rounded-none focus-visible:ring-0 px-4 py-3 transition-colors duration-200 mb-4 bg-gray-50 bg-opacity-30"
+                            className="text-2xl font-bold border-b-2 border-gray-200 hover:border-blue-300 focus:border-blue-500 shadow-none rounded-none focus-visible:ring-0 px-4 py-3 transition-colors duration-200 mb-4 bg-gray-50 bg-opacity-30"
                         />
 
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 py-2">
@@ -213,6 +214,15 @@ export function NoteEditor({ noteId }: NoteEditorProps) {
                                 className="min-h-[400px] border rounded-lg p-4 resize-none text-gray-800 focus:ring-2 focus:ring-blue-100 focus:border-blue-300 transition-all"
                             />
                         </div>
+
+                        {/* Add the Summary Display Component */}
+                        <SummaryDisplay
+                            noteId={note.id}
+                            noteTitle={title}
+                            noteContent={content}
+                            summary={note.summary}
+                            summaryUpdatedAt={note.summary_updated_at}
+                        />
                     </div>
                 </CardContent>
             </Card>
