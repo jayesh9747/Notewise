@@ -1,0 +1,29 @@
+<svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect x="30" y="30" width="240" height="240" rx="20" fill="#3B82F6" />
+  <rect x="40" y="40" width="220" height="220" rx="15" fill="#FFFFFF" />
+  
+  <!-- Note page effect -->
+  <path d="M210 60 L210 100 L250 100 L210 60" fill="#EBF5FF" stroke="#3B82F6" stroke-width="2" />
+  <path d="M210 60 L250 100 L250 240 L50 240 L50 60 L210 60" fill="#EBF5FF" stroke="#3B82F6" stroke-width="2" />
+  
+  <!-- Horizontal lines -->
+  <line x1="70" y1="120" x2="230" y2="120" stroke="#D1E0FF" stroke-width="3" />
+  <line x1="70" y1="150" x2="230" y2="150" stroke="#D1E0FF" stroke-width="3" />
+  <line x1="70" y1="180" x2="230" y2="180" stroke="#D1E0FF" stroke-width="3" />
+  <line x1="70" y1="210" x2="230" y2="210" stroke="#D1E0FF" stroke-width="3" />
+  
+  <!-- Pen/Pencil -->
+  <path d="M190 90 L230 130 L190 170 L150 130 L190 90" fill="#3B82F6" />
+  <path d="M190 90 L230 130 L190 170 L150 130 L190 90" fill="#3B82F6" stroke="#2563EB" stroke-width="2" />
+  
+  <!-- "Smart" Dot Connections -->
+  <circle cx="90" cy="120" r="4" fill="#3B82F6" />
+  <circle cx="120" cy="150" r="4" fill="#3B82F6" />
+  <circle cx="150" cy="180" r="4" fill="#3B82F6" />
+  <line x1="90" y1="120" x2="120" y2="150" stroke="#3B82F6" stroke-width="2" />
+  <line x1="120" y1="150" x2="150" y2="180" stroke="#3B82F6" stroke-width="2" />
+  
+  <!-- Highlight accent -->
+  <path d="M70 200 L110 200 L110 220 L70 220 Z" fill="#FBBF24" fill-opacity="0.3" stroke="#FBBF24" stroke-width="1" />
+</svg>
